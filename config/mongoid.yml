@@ -1,0 +1,18 @@
+production:
+  clients:
+    default:
+      uri:  <%= Rails.application.secrets.mongo_path %>
+development:
+  clients:
+    default:
+      uri: <%= Rails.application.secrets.mongo_path %>
+test:
+  clients:
+    default:
+      database: f1_fantasy_api_test
+      hosts:
+        - localhost:27017
+      options:
+        read:
+          mode: :primary
+        max_pool_size: 1
