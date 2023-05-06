@@ -35,3 +35,10 @@ group :development, :test do
   gem "pry-nav"
   gem "dotenv-rails"
 end
+
+group :test do
+  gem 'rspec-rails'
+  gem 'mongoid-rspec'
+  gem 'factory_bot_rails', '~> 6.1'
+  gem 'faker', '~> 2.17'
+end
