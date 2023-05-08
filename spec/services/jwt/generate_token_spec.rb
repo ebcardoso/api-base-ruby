@@ -3,10 +3,10 @@ require 'rails_helper'
 RSpec.describe JwtServices::GenerateToken::Transaction do
   describe 'Success Path - Token Generated' do
     before(:all) do
-      @params = ActionController::Parameters.new({
+      @params = {
         user_id: SecureRandom.hex(10),
         expiration_date: (DateTime.now+1.day).strftime('%Y-%m-%d %H:%M')
-      })
+      }
       @result = JwtServices::GenerateToken::Transaction.call(@params) do |on|
         on.failure{ |result| {} }
         on.success{ |result| result }
@@ -29,8 +29,7 @@ RSpec.describe JwtServices::GenerateToken::Transaction do
   
   describe 'Failure - Missing Params' do
     it 'should return an failure' do
-      params = ActionController::Parameters.new({})
-      @result = JwtServices::GenerateToken::Transaction.call(params)
+      @result = JwtServices::GenerateToken::Transaction.call({})
       expect(@result.failure?).to be_truthy
     end
   end

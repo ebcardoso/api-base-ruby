@@ -5,7 +5,7 @@ module JwtServices
       step :generate_token
 
       def validate_inputs(params)
-        validation = Contract.call(params.permit!.to_h)
+        validation = Contract.call(params)
         if validation.success?
           Success(params)
         else

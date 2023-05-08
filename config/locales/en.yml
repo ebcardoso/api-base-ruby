@@ -36,9 +36,14 @@ en:
   token:
     generate:
       error: 'Error on generate token'
+    decode:
+      error: 'Error on decode token'
   user:
     registration:
       success : 'User registered successfully'
       errors:
         password_different: "Params :password and :password_validation don't match"
         persist_user: 'Failure on persist user'
+    signin:
+      success: 'User authenticated succesfully'
+      invalid: 'User or password invalid'
