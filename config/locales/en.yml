@@ -31,3 +31,8 @@
 
 en:
   hello: "Hello world"
+  params:
+    invalid: 'Invalid params'
+  token:
+    generate:
+      error: 'Error on generate token'

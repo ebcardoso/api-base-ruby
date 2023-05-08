@@ -13,17 +13,17 @@ RSpec.describe User, type: :model do
     expect(@user).to be_valid
   end
 
-  it 'is not without field :name' do
+  it 'is not valid without field :name' do
     @user.name = nil
     expect(@user).to_not be_valid
   end
 
-  it 'is not without field :email' do
+  it 'is not valid without field :email' do
     @user.email = nil
     expect(@user).to_not be_valid
   end
 
-  it 'it an :email that already existis' do
+  it 'it not valid if :email already existis' do
     @user.save
     @user2 = User.new(
       name: Faker::Name.name,
@@ -33,7 +33,7 @@ RSpec.describe User, type: :model do
     expect(@user2).to_not be_valid
   end
 
-  it 'is not without field :password' do
+  it 'is not valid without field :password' do
     @user.password = nil
     expect(@user).to_not be_valid
   end
