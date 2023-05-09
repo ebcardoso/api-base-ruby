@@ -38,6 +38,10 @@ en:
       error: 'Error on generate token'
     decode:
       error: 'Error on decode token'
+      expired: 'Expired token'
+      valid: 'Valid token'
+    verify:
+      error: 'Error on verify token'
   user:
     registration:
       success : 'User registered successfully'
