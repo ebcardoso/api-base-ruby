@@ -50,6 +50,21 @@ RSpec.describe Api::V1::AuthController, type: :request do
     end
   end
 
+  context 'Failure - Sending an random invalid Token' do
+    before(:all) do
+      params = {token: 'ascapsikchakscljbaclajbclkacbalksj'}
+      post api_v1_auth_verify_token_path, params: params, as: :json
+    end
+
+    it 'should have status 401' do
+      expect(response).to have_http_status(401)
+    end
+
+    it 'should be not valid' do
+      expect(json_response.dig(:is_valid)).to be_falsy
+    end
+  end
+
   context 'Failure - Missing Params' do
     before(:all) do
       # params = {email: @current_user.email, password: 'pass@1915'}

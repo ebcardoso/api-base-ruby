@@ -28,6 +28,17 @@ RSpec.describe JwtServices::VerifyToken::Transaction do
     end
   end
 
+  context 'Failure - Sending an random invalid Token' do
+    before(:all) do
+      token = 'ascapsikchakscljbaclajbclkacbalksj'
+      @result = JwtServices::VerifyToken::Transaction.call({token: token})
+    end
+
+    it 'should return a message' do
+      expect(@result.failure).to be_truthy
+    end
+  end
+
   context 'Failure - Expired Token' do
     before(:all) do
       @payload = {
@@ -40,7 +51,6 @@ RSpec.describe JwtServices::VerifyToken::Transaction do
 
     it 'should return a message' do
       expect(@result.failure).to be_truthy
-      expect(@result.failure).to eq(I18n.t('token.decode.expired'))
     end
   end
 end

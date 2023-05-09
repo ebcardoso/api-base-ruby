@@ -17,7 +17,7 @@ module JwtServices
 
       def decode_token(params)
         JwtServices::DecodeToken::Transaction.call(params) do |on|
-          on.failure{ |result| result }
+          on.failure{ |result| Failure(result) }
           on.success{ |result| Success(result) }
         end
       end
