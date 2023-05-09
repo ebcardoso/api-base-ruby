@@ -6,6 +6,10 @@ Rails.application.routes.draw do
         post :signin
         post :verify_token
       end
+
+      namespace :profile do
+        get :me
+      end
     end
   end
 end
