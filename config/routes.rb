@@ -8,7 +8,7 @@ Rails.application.routes.draw do
       end
 
       namespace :profile do
-        get :me
+        get :my_user
       end
     end
   end
