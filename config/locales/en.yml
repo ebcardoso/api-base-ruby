@@ -43,6 +43,8 @@ en:
     verify:
       error: 'Error on verify token'
   user:
+    errors:
+      not_found: 'User not found'
     registration:
       success : 'User registered successfully'
       errors:
@@ -51,3 +53,7 @@ en:
     signin:
       success: 'User authenticated succesfully'
       invalid: 'User or password invalid'
+    forgot_password:
+      success: 'A token was sent to the user'
+      errors:
+        generate_token: 'Error on generating token'

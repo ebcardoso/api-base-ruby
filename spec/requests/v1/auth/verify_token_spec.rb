@@ -18,7 +18,7 @@ RSpec.describe Api::V1::AuthController, type: :request do
       expect(response).to have_http_status(200)
     end
 
-    it 'shoult contains a message' do
+    it 'should countain a message' do
       expect(json_response).to have_key(:message)
       expect(json_response.dig(:message)).to eq(I18n.t('token.decode.valid'))
     end

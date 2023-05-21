@@ -5,6 +5,7 @@ Rails.application.routes.draw do
         post :signup
         post :signin
         post :verify_token
+        post :forgot_password_token
       end
 
       namespace :profile do
