@@ -7,4 +7,13 @@ class Api::V1::ProfileController < ApiController
     }
   end
 
+  def update_password
+    ProfileServices::UpdatePassword::Transaction.call({params: params, current_user: @current_user}) do |on|
+      on.failure(:validate_inputs) {|message, content| render json: {message: message, content: content}, status: 400}
+      on.failure(:validate_password) {|message| render json: {message: message, content: {}}, status: 403}
+      on.failure(:validate_new_password) {|message| render json: {message: message, content: {}}, status: 400}
+      on.failure{|message| render json: {message: message, content: {}}, status: 500}
+      on.success{|response| render json: {message: response, content: {}}, status: 200}
+    end
+  end
 end

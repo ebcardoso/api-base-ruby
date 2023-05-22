@@ -57,3 +57,6 @@ en:
       success: 'A token was sent to the user'
       errors:
         generate_token: 'Error on generating token'
+    update_password:
+      success: 'Password updated successfully'
+      error: 'Failure on updating password'

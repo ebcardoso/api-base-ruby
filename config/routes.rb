@@ -10,6 +10,7 @@ Rails.application.routes.draw do
 
       namespace :profile do
         get :my_user
+        post :update_password
       end
     end
   end
