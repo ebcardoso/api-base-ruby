@@ -35,4 +35,15 @@ class Api::V1::AuthController < ApplicationController
       on.success{|response| render json: {message: response, content: {}}, status: 200}
     end
   end
+
+  def reset_password_confirm
+    AuthServices::ResetPasswordConfirm::Transaction.call(params) do |on|
+      on.failure(:validate_inputs) {|message, content| render json: {message: message, content: content}, status: 400}
+      on.failure(:validate_password) {|message| render json: {message: message, content: {}}, status: 400}
+      on.failure(:find_user_by_token) {|message| render json: {message: message, content: {}}, status: 404}
+      on.failure(:validate_token_deadline) {|message| render json: {message: message, content: {}}, status: 422}
+      on.failure {|message|  render json: {message: message, content: {}}, status: 500}
+      on.success {|response| render json: {message: response, content: {}}, status: 200}
+    end
+  end
 end

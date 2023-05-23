@@ -30,7 +30,7 @@ RSpec.describe Api::V1::AuthController, type: :request do
       expect(response).to have_http_status(400)
     end
 
-    it 'should countain a message' do
+    it 'should contain a message' do
       expect(@response).to have_key('message')
     end
   end
@@ -46,7 +46,7 @@ RSpec.describe Api::V1::AuthController, type: :request do
       expect(response).to have_http_status(404)
     end
 
-    it 'should countain a message' do
+    it 'should contain a message' do
       expect(@response).to have_key('message')
       expect(@response.dig('message')).to eq(I18n.t('user.errors.not_found'))
     end

@@ -16,4 +16,5 @@ class User
   validates :name, presence: {message: "Field :name is required"}
   validates :email, presence: {message: "Field :email is required"}
   validates :email, uniqueness: {message: "This :email already exists"}
+  validates :token_password_recovery, uniqueness: {message: "This :token already exists"}
 end
