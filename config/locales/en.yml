@@ -62,6 +62,9 @@ en:
       errors:
         deadline: 'Token Expired'
         change: 'Failure on changing password'
+    update_profile:
+      success: 'Profile updated successfully'
+      error: 'Failure on updating profile'
     update_password:
       success: 'Password updated successfully'
       error: 'Failure on updating password'
