@@ -27,7 +27,7 @@ module JwtServices
           expiration = payload&.dig('expiration_date')&.to_datetime
           return Failure(I18n.t('token.verify.error')) if expiration.nil?
 
-          if expiration > DateTime.now
+          if expiration > ActiveSupport::TimeZone[-3].now
             Success(I18n.t('token.decode.valid'))
           else
             Failure(I18n.t('token.decode.expired'))

@@ -28,7 +28,7 @@ module AuthServices
 
       def generate_token(user)
         user.token_password_recovery = SecureRandom.hex(3)
-        user.token_password_recovery_deadline = DateTime.now+10.minutes
+        user.token_password_recovery_deadline = ActiveSupport::TimeZone[-3].now+10.minutes
       
         if user.save
           Success(user)

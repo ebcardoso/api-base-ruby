@@ -5,7 +5,7 @@ RSpec.describe JwtServices::DecodeToken::Transaction do
     before(:all) do
       @payload = {
         user_id: SecureRandom.hex(10),
-        expiration_date: (DateTime.now+1.day).strftime('%Y-%m-%d %H:%M')
+        expiration_date: (ActiveSupport::TimeZone[-3].now+1.day).strftime('%Y-%m-%d %H:%M')
       }
       token = JWT.encode @payload, nil, 'none'
       @decoded_token = JwtServices::DecodeToken::Transaction.call({token: token}) do |on|

@@ -5,6 +5,6 @@ FactoryBot.define do
     password { 'pass@1915' }
   
     token_password_recovery { '12c45f'}
-    token_password_recovery_deadline { DateTime.now+10.minutes  }
+    token_password_recovery_deadline { ActiveSupport::TimeZone[-3].now+10.minutes  }
   end
 end

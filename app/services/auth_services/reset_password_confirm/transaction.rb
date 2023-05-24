@@ -39,7 +39,7 @@ module AuthServices
         params = input[0]
         user = input[1]
 
-        if DateTime.now > user.token_password_recovery_deadline
+        if ActiveSupport::TimeZone[-3].now > user.token_password_recovery_deadline
           Failure(I18n.t('user.reset_password.errors.deadline'))
         else
           Success(input)

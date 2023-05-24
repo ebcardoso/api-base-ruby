@@ -5,7 +5,7 @@ RSpec.describe JwtServices::GenerateToken::Transaction do
     before(:all) do
       @params = {
         user_id: SecureRandom.hex(10),
-        expiration_date: (DateTime.now+1.day).strftime('%Y-%m-%d %H:%M')
+        expiration_date: (ActiveSupport::TimeZone[-3].now+1.day).strftime('%Y-%m-%d %H:%M')
       }
       @result = JwtServices::GenerateToken::Transaction.call(@params) do |on|
         on.failure{ |result| {} }

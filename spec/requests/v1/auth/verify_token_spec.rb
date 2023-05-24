@@ -6,7 +6,7 @@ RSpec.describe Api::V1::AuthController, type: :request do
       @current_user = FactoryBot.create(:user_001)      
       payload = {
         user_id: @current_user.id.to_s,
-        expiration_date: (DateTime.now+1.day).strftime('%Y-%m-%d %H:%M')
+        expiration_date: (ActiveSupport::TimeZone[-3].now+1.day).strftime('%Y-%m-%d %H:%M')
       }
       token = JWT.encode payload, nil, 'none'
 
@@ -33,7 +33,7 @@ RSpec.describe Api::V1::AuthController, type: :request do
       @current_user = FactoryBot.create(:user_001)      
       payload = {
         user_id: @current_user.id.to_s,
-        expiration_date: (DateTime.now-1.day).strftime('%Y-%m-%d %H:%M')
+        expiration_date: (ActiveSupport::TimeZone[-3].now-1.day).strftime('%Y-%m-%d %H:%M')
       }
       token = JWT.encode payload, nil, 'none'
 

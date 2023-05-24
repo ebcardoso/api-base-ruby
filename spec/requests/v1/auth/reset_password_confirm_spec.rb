@@ -90,7 +90,7 @@ RSpec.describe Api::V1::AuthController, type: :request do
   context 'Failure Path - Expired Token.' do
     before(:all) do
       @current_user = FactoryBot.create(:user_001)
-      @current_user.token_password_recovery_deadline = DateTime.now-1.minute
+      @current_user.token_password_recovery_deadline = ActiveSupport::TimeZone[-3].now-1.minute
       @current_user.save
 
       params = {

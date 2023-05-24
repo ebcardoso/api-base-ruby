@@ -39,7 +39,7 @@ module AuthServices
       def generate_token(user)
         params = {
           user_id: user.id.to_s,
-          expiration_date: (DateTime.now+1.day).strftime('%Y-%m-%d %H:%M')
+          expiration_date: (ActiveSupport::TimeZone[-3].now+1.day).strftime('%Y-%m-%d %H:%M')
         }          
         JwtServices::GenerateToken::Transaction.call(params) do |on|
           on.failure{ |result| Failure(result) }
