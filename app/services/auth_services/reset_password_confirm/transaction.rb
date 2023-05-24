@@ -51,6 +51,8 @@ module AuthServices
         user = input[1]
 
         user.password = params[:password]
+        user.token_password_recovery = nil
+        user.token_password_recovery_deadline = nil
 
         if user.save
           Success(I18n.t('user.reset_password.success'))

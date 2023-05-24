@@ -19,7 +19,7 @@ RSpec.describe Api::V1::ProfileController, type: :request do
       @response = JSON.parse(response.body)
     end
 
-    it 'Should return status 400' do
+    it 'Should return status 200' do
       expect(response).to have_http_status(200)
     end
 

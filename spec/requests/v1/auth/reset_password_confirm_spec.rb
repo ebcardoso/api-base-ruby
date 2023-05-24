@@ -27,6 +27,11 @@ RSpec.describe Api::V1::AuthController, type: :request do
     it 'should match the new password' do
       expect(@current_user.authenticate('123456msc')).to be_truthy
     end
+
+    it 'should nullify the token' do
+      expect(@current_user.token_password_recovery).to be_nil
+      expect(@current_user.token_password_recovery_deadline).to be_nil
+    end
   end
   
   context 'Failure Path - Missing Params.' do
