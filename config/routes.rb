@@ -14,6 +14,8 @@ Rails.application.routes.draw do
         post :update_profile
         post :update_password
       end
+
+      resource :users
     end
   end
 end
