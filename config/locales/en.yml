@@ -45,6 +45,9 @@ en:
   user:
     errors:
       not_found: 'User not found'
+    destroy:
+      success: 'User deleted successfully'
+      errors: 'Error on delete user'
     registration:
       success : 'User registered successfully'
       errors:
