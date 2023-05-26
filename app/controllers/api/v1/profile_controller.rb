@@ -3,7 +3,7 @@ class Api::V1::ProfileController < ApiController
     render json: {
       name: @current_user.name,
       email: @current_user.email,
-      registered_in: (@current_user.created_at-3.hours).strftime('%Y-%m-%d %H:%M')
+      registered_at: (@current_user.created_at-3.hours).strftime('%Y-%m-%d %H:%M')
     }
   end
 

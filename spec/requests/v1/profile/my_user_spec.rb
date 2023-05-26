@@ -21,7 +21,7 @@ RSpec.describe Api::V1::ProfileController, type: :request do
     it 'Should have all the fields on output' do
       expect(@response).to have_key('name')
       expect(@response).to have_key('email')
-      expect(@response).to have_key('registered_in')
+      expect(@response).to have_key('registered_at')
     end
   end
 end

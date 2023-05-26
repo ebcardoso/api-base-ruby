@@ -22,12 +22,16 @@ RSpec.describe Api::V1::UsersController, type: :request do
       expect(response).to have_http_status(200)
     end
 
-    it 'should contain :message and :content on output' do
-      expect(@response).to have_key('message')
-      expect(@response.dig('message')).to eq(I18n.t('user.registration.success'))
-      expect(@response).to have_key('content')
-      expect(@response&.dig('content', 'name')).to eq(@params.dig(:name))
-      expect(@response&.dig('content', 'email')).to eq(@params.dig(:email))
+    it "should contain the fields of the user on output" do
+      expect(@response).to have_key('id')
+      expect(@response).to have_key('name')
+      expect(@response).to have_key('email')
+      expect(@response).to have_key('registered_at')
+    end
+
+    it 'should match the values' do
+      expect(@response&.dig('name')).to eq(@params.dig(:name))
+      expect(@response&.dig('email')).to eq(@params.dig(:email))
     end
   end
 

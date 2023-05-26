@@ -15,7 +15,7 @@ Rails.application.routes.draw do
         post :update_password
       end
 
-      resource :users
+      resources :users
     end
   end
 end
