@@ -1,4 +1,11 @@
 class Api::V1::UsersController < ApiController
+  def index
+    UsersServices::Index::Transaction.call do |on|
+      on.failure {|response| render json: {message: response}, status: 500}
+      on.success {|response| render json: response, status: 200}
+    end
+  end
+
   def show
     UsersServices::Show::Transaction.call(params) do |on|
       on.failure(:validate_inputs) {|message, content| render json: {message: message, content: content}, status: 400}

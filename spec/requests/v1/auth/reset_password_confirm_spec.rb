@@ -6,7 +6,7 @@ RSpec.describe Api::V1::AuthController, type: :request do
       @current_user = FactoryBot.create(:user_001)
 
       params = {
-        token: '12c45f',
+        token: @current_user.token_password_recovery,
         password: '123456msc',
         password_confirmation: '123456msc'
       }
@@ -99,7 +99,7 @@ RSpec.describe Api::V1::AuthController, type: :request do
       @current_user.save
 
       params = {
-        token: '12c45f',
+        token: @current_user.token_password_recovery,
         password: '123456',
         password_confirmation: '123456'
       }
