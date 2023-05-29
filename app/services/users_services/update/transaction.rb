@@ -2,8 +2,8 @@ module UsersServices
   module Update
     class Transaction < MainService
       step :validate_inputs
-      step :find_user
-      step :update_user
+      step :find_model
+      step :update_model
 
       def validate_inputs(params)
         validation = Contract.call(params.permit!.to_h)
@@ -14,30 +14,30 @@ module UsersServices
         end
       end
 
-      def find_user(params)
-        user = User.where(
+      def find_model(params)
+        model = User.where(
           id: params.dig(:id)
         ).first
-        if user.present?
-          Success[params, user]
+        if model.present?
+          Success[params, model]
         else
           Failure(I18n.t('user.errors.not_found'))
         end
       end
 
-      def update_user(input)
+      def update_model(input)
         params = input[0]
-        user = input[1]
+        model = input[1]
 
-        user.name = params.dig(:name) if params.dig(:name)
-        user.email = params.dig(:email) if params.dig(:email)
+        model.name = params.dig(:name) if params.dig(:name)
+        model.email = params.dig(:email) if params.dig(:email)
 
-        if user.save
+        if model.save
           response = {
-            id: user.id.to_s,
-            name: user.name,
-            email: user.email,
-            registered_at: user.created_at.strftime('%d/%m/%Y %H:%M')
+            id: model.id.to_s,
+            name: model.name,
+            email: model.email,
+            registered_at: model.created_at.strftime('%d/%m/%Y %H:%M')
           }
           Success(response)
         else

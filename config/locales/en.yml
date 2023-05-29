@@ -47,6 +47,8 @@ en:
       not_found: 'User not found'
     index:
       errors: 'Error on fetch users'
+    create:
+      errors: 'Error on creating user'
     update:
       errors: 'Error on updating user'
     destroy:

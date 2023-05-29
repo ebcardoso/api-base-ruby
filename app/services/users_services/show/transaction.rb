@@ -2,7 +2,7 @@ module UsersServices
   module Show
     class Transaction < MainService
       step :validate_inputs
-      step :find_user
+      step :find_model
       step :output
 
       def validate_inputs(params)
@@ -14,23 +14,23 @@ module UsersServices
         end
       end
 
-      def find_user(params)
-        user = User.where(
+      def find_model(params)
+        model = User.where(
           id: params.dig(:id)
         ).first
-        if user.present?
-          Success(user)
+        if model.present?
+          Success(model)
         else
           Failure(I18n.t('user.errors.not_found'))
         end
       end
 
-      def output(user)
+      def output(model)
         response = {
-          id: user.id.to_s,
-          name: user.name,
-          email: user.email,
-          registered_at: user.created_at.strftime('%d/%m/%Y %H:%M')
+          id: model.id.to_s,
+          name: model.name,
+          email: model.email,
+          registered_at: model.created_at.strftime('%d/%m/%Y %H:%M')
         }
         Success(response)
       end

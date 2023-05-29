@@ -2,7 +2,7 @@ module UsersServices
   module Create
     class Transaction < MainService
       step :validate_inputs
-      step :persist_user
+      step :persist_model
       step :output
 
       def validate_inputs(params)
@@ -15,25 +15,25 @@ module UsersServices
         end
       end
 
-      def persist_user(params)
-        user = User.new
-        user.name = params[:name]
-        user.email = params[:email]
-        user.password = SecureRandom.hex(3)
+      def persist_model(params)
+        model = User.new
+        model.name = params[:name]
+        model.email = params[:email]
+        model.password = SecureRandom.hex(3)
         
-        if user.save
-          Success(user)
+        if model.save
+          Success(model)
         else
-          Failure(I18n.t('user.registration.errors.persist_user'))
+          Failure(I18n.t('user.create.errors'))
         end
       end
 
-      def output(user)
+      def output(model)
         response = {
-          id: user.id.to_s,
-          name: user.name,
-          email: user.email,
-          registered_at: user.created_at.strftime('%d/%m/%Y %H:%M')
+          id: model.id.to_s,
+          name: model.name,
+          email: model.email,
+          registered_at: model.created_at.strftime('%d/%m/%Y %H:%M')
         }
         Success(response)
       end

@@ -2,8 +2,8 @@ module UsersServices
   module Destroy
     class Transaction < MainService
       step :validate_inputs
-      step :find_user
-      step :destroy_user
+      step :find_model
+      step :destroy_model
 
       def validate_inputs(params)
         validation = Contract.call(params.permit!.to_h)
@@ -14,19 +14,19 @@ module UsersServices
         end
       end
 
-      def find_user(params)
-        user = User.where(
+      def find_model(params)
+        model = User.where(
           id: params.dig(:id)
         ).first
-        if user.present?
-          Success(user)
+        if model.present?
+          Success(model)
         else
           Failure(I18n.t('user.errors.not_found'))
         end
       end
 
-      def destroy_user(user)
-        if user.destroy
+      def destroy_model(model)
+        if model.destroy
           Success(I18n.t('user.destroy.success'))
         else
           Failure(I18n.t('user.destroy.errors'))
