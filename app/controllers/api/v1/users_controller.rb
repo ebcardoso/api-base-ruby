@@ -2,7 +2,8 @@ class Api::V1::UsersController < ApiController
   before_action :set_model, only: %i[show update destroy]
 
   def index
-    UsersServices::Index::Transaction.call do |on|
+    UsersServices::Index::Transaction.call(params) do |on|
+      on.failure(:validate_inputs) {|message, content| render json: {message: message, content: content}, status: 400}
       on.failure {|response| render json: {message: response}, status: 500}
       on.success {|response| render json: response, status: 200}
     end

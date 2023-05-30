@@ -16,6 +16,7 @@ gem "puma", "~> 5.0"
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
 # gem "kredis"
 
+gem 'will_paginate_mongoid'
 gem 'mongoid', '~> 7.3'
 gem "bcrypt", "~> 3.1.7"
 gem 'jwt'

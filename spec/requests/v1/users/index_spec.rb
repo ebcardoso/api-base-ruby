@@ -25,8 +25,15 @@ RSpec.describe Api::V1::UsersController, type: :request do
     end
 
     it 'Should return the fields of the user' do
-      expect(@response).to be_a(Array)
-      @response.each do |item|
+      expect(@response).to have_key('total_items')
+      expect(@response).to have_key('total_pages')
+      expect(@response).to have_key('page')
+      expect(@response).to have_key('previous_page')
+      expect(@response).to have_key('next_page')
+      expect(@response).to have_key('result')
+      expect(@response&.dig('result')).to be_a(Array)
+
+      @response&.dig('result')&.each do |item|
         expect(item).to have_key('id')
         expect(item).to have_key('name')
         expect(item).to have_key('email')
