@@ -30,8 +30,14 @@ module UsersServices
         total_items = input[1]
         total_pages = ((total_items-1)/10)+1
         page = input[2]
-        previous_page = page==1 ? 1 : page-1
-        next_page = page==total_pages ? total_pages : page+1
+        previous_page = if page>total_pages
+                          total_pages 
+                        elsif page==1
+                          1
+                        else
+                          page-1
+                        end
+        next_page = page>=total_pages ? total_pages : page+1
 
         result = items.map do |item|
         {
