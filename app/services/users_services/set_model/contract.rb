@@ -1,5 +1,5 @@
 module UsersServices
-  module Show
+  module SetModel
     class Contract < ApplicationContract
       schema do
         required(:id).value(:string)
