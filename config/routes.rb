@@ -15,7 +15,11 @@ Rails.application.routes.draw do
         post :update_password
       end
 
-      resources :users
+      resources :users do
+        collection do
+          patch ':id/block_user', to: 'users#block_user', as: :block_user
+        end
+      end
     end
   end
 end

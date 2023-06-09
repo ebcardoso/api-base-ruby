@@ -1,5 +1,5 @@
 class Api::V1::UsersController < ApiController
-  before_action :set_model, only: %i[show update destroy]
+  before_action :set_model, only: %i[show update destroy block_user]
 
   def index
     UsersServices::Index::Transaction.call(params) do |on|
@@ -38,14 +38,19 @@ class Api::V1::UsersController < ApiController
 
   def destroy
     UsersServices::Destroy::Transaction.call(@model) do |on|
-      on.failure(:validate_inputs) {|message, content| render json: {message: message, content: content}, status: 400}
-      on.failure(:find_model) {|message| render json: {message: message}, status: 404}
       on.failure {|response| render json: {message: response}, status: 500}
       on.success {|response| render json: {message: response}, status: 200}
     end
   end
 
-  private 
+  def block_user
+    UsersServices::BlockUser::Transaction.call(@model) do |on|
+      on.failure { |response| render json: { message: response }, status: 500 }
+      on.success { |response| render json: { message: response }, status: 200 }
+    end
+  end
+
+  private
 
     def set_model
       @model = UsersServices::SetModel::Transaction.call(params) do |on|

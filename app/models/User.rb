@@ -11,6 +11,9 @@ class User
   field :token_password_recovery, type: String
   field :token_password_recovery_deadline, type: DateTime
 
+  #Access Control
+  field :is_blocked, type: Boolean, default: false
+
   has_secure_password
   
   validates :name, presence: {message: "Field :name is required"}

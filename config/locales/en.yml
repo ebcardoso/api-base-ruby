@@ -54,6 +54,9 @@ en:
     destroy:
       success: 'User deleted successfully'
       errors: 'Error on delete user'
+    block:
+      success: 'User blocked successfully'
+      errors: 'Error on blocking user'
     registration:
       success : 'User registered successfully'
       errors:
