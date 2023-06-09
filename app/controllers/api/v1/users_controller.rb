@@ -1,5 +1,5 @@
 class Api::V1::UsersController < ApiController
-  before_action :set_model, only: %i[show update destroy block_user]
+  before_action :set_model, only: %i[show update destroy block_user unlock_user]
 
   def index
     UsersServices::Index::Transaction.call(params) do |on|
@@ -45,6 +45,13 @@ class Api::V1::UsersController < ApiController
 
   def block_user
     UsersServices::BlockUser::Transaction.call(@model) do |on|
+      on.failure { |response| render json: { message: response }, status: 500 }
+      on.success { |response| render json: { message: response }, status: 200 }
+    end
+  end
+
+  def unlock_user
+    UsersServices::UnlockUser::Transaction.call(@model) do |on|
       on.failure { |response| render json: { message: response }, status: 500 }
       on.success { |response| render json: { message: response }, status: 200 }
     end

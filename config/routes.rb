@@ -18,6 +18,7 @@ Rails.application.routes.draw do
       resources :users do
         collection do
           patch ':id/block_user', to: 'users#block_user', as: :block_user
+          patch ':id/unlock_user', to: 'users#unlock_user', as: :unlock_user
         end
       end
     end

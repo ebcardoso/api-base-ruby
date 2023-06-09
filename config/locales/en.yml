@@ -57,6 +57,9 @@ en:
     block:
       success: 'User blocked successfully'
       errors: 'Error on blocking user'
+    unlock:
+      success: 'User unlocked successfully'
+      errors: 'Error on unlocking user'
     registration:
       success : 'User registered successfully'
       errors:
