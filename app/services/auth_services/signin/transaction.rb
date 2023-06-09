@@ -3,6 +3,7 @@ module AuthServices
     class Transaction < MainService
       step :validate_inputs
       step :find_user
+      step :verify_block
       step :validate_password
       step :generate_token
 
@@ -23,6 +24,15 @@ module AuthServices
           Success[params, user]
         else
           Failure('Invalid Credentials')
+        end
+      end
+
+      def verify_block(input)
+        user = input[1]
+        if user.is_blocked
+          Failure(I18n.t('user.signin.blocked'))
+        else
+          Success(input)
         end
       end
 

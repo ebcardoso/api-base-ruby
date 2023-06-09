@@ -68,6 +68,7 @@ en:
     signin:
       success: 'User authenticated succesfully'
       invalid: 'User or password invalid'
+      blocked: 'The user is blocked'
     forgot_password:
       success: 'A token was sent to the user'
       errors:

@@ -14,6 +14,7 @@ class Api::V1::AuthController < ApplicationController
       on.failure(:validate_inputs) {|message, content| render json: {message: message, content: content}, status: 400}
       on.failure(:find_user) {|message| render json: {message:message, content: {}}, status: 401}
       on.failure(:validate_password) {|message| render json: {message:message, content: {}}, status: 401}
+      on.failure(:verify_block) {|message| render json: {message: message, content: {}}, status: 401}
       on.failure(:generate_token) {|message| render json: {message:message, content: {}}, status: 500}
       on.success {|response| render json: response, status: 200}
     end

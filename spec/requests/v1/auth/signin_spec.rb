@@ -47,4 +47,21 @@ RSpec.describe Api::V1::AuthController, type: :request do
       expect(response).to have_http_status(401)
     end
   end
+
+  context 'Failure Path - Blocked User' do
+    before(:all) do
+      @current_user = FactoryBot.create(:user_002)
+      params = {email: @current_user.email, password: 'pass@1915'}
+      post api_v1_auth_signin_path, params: params, as: :json
+    end
+
+    it 'should return status 401' do
+      expect(response).to have_http_status(401)
+    end
+
+    it 'should return a message and content' do
+      expect(json_response).to have_key(:message)
+      expect(json_response&.dig(:message)).to eq(I18n.t('user.signin.blocked'))
+    end
+  end
 end
