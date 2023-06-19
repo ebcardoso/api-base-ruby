@@ -3,6 +3,7 @@ module AuthServices
     class Transaction < MainService
       step :validate_inputs
       step :validate_password
+      step :check_existence
       step :persist_user
       step :generate_token
       step :output
@@ -22,6 +23,15 @@ module AuthServices
           Success(params) 
         else
           Failure(I18n.t('user.registration.errors.password_different'))
+        end
+      end
+
+      def check_existence(params)
+        user = User.where(email: params[:email]).first
+        if user.present?
+          Failure(I18n.t('user.registration.errors.already_exists'))
+        else
+          Success(params)
         end
       end
 

@@ -3,6 +3,7 @@ class Api::V1::AuthController < ApplicationController
     AuthServices::Signup::Transaction.call(params) do |on|
       on.failure(:validate_inputs) {|message, content| render json: {message: message, content: content}, status: 400}
       on.failure(:validate_password) {|message| render json: {message: message, content: {}}, status: 400}
+      on.failure(:check_existence) {|message| render json: {message: message, content: {}}, status: 409}
       on.failure(:persist_user) {|message| render json: {message: message, content: {}}, status: 500}
       on.failure(:generate_token) {|message| render json: {message: message, content: {}}, status: 500}
       on.success {|response| render json: response, status: 200}

@@ -60,4 +60,28 @@ RSpec.describe Api::V1::AuthController, type: :request do
       expect(json_response.dig(:message)).to eq(I18n.t('user.registration.errors.password_different'))
     end
   end
+
+  context 'Failure - User already exists' do
+    before(:all) do
+      @current_user = FactoryBot.create(:user_001)
+      password = Faker::Internet.password(min_length: 8)
+      params = {
+        name: Faker::Name.name,
+        email: @current_user.email,
+        password: password,
+        password_confirmation: password
+      }
+      post api_v1_auth_signup_path, params: params, as: :json
+    end
+
+    it 'should return status 409' do
+      expect(response).to have_http_status(409)
+    end
+
+    it 'should contain :message and :access token' do
+      expect(json_response).to have_key(:message)
+      expect(json_response.dig(:message)).to eq(I18n.t('user.registration.errors.already_exists'))
+      expect(json_response).to have_key(:content)
+    end
+  end
 end

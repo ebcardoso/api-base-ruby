@@ -63,6 +63,7 @@ en:
     registration:
       success : 'User registered successfully'
       errors:
+        already_exists: 'This user already exists'
         password_different: "Params :password and :password_validation don't match"
         persist_user: 'Failure on persist user'
     signin:
