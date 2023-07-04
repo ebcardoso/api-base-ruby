@@ -17,9 +17,10 @@ module UsersServices
 
       def get_items(params)
         page = params[:page].present? ? params[:page].to_i : 1
-        total_items = User.count
-        items = User.order_by(name: :asc).paginate(page: page, per_page: 10)
-
+        items = User.any_of(search_filter(params[:search]))
+                    .order_by(name: :asc)
+                    .paginate(page: page, per_page: 10)
+        total_items = items.count
         Success[items, total_items, page]
       rescue 
         Failure(I18n.t('user.index.errors'))
@@ -60,6 +61,15 @@ module UsersServices
         Success(response)
       rescue
         Failure(I18n.t('user.index.errors'))
+      end
+
+      private
+
+      def search_filter(key)
+        [
+          { name: /.*#{key}.*/i },
+          { email: /.*#{key}.*/i }
+        ]
       end
 
     end
