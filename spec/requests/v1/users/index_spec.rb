@@ -30,13 +30,14 @@ RSpec.describe Api::V1::UsersController, type: :request do
       expect(@response).to have_key('page')
       expect(@response).to have_key('previous_page')
       expect(@response).to have_key('next_page')
-      expect(@response).to have_key('result')
-      expect(@response&.dig('result')).to be_a(Array)
+      expect(@response).to have_key('results')
+      expect(@response&.dig('results')).to be_a(Array)
 
-      @response&.dig('result')&.each do |item|
+      @response&.dig('results')&.each do |item|
         expect(item).to have_key('id')
         expect(item).to have_key('name')
         expect(item).to have_key('email')
+        expect(item).to have_key('is_blocked')
         expect(item).to have_key('registered_at')
       end
     end

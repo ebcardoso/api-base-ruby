@@ -39,11 +39,12 @@ module UsersServices
                         end
         next_page = page>=total_pages ? total_pages : page+1
 
-        result = items.map do |item|
+        results = items.map do |item|
         {
           id: item.id.to_s,
           name: item.name,
           email: item.email,
+          is_blocked: item.is_blocked,
           registered_at: item.created_at.strftime('%d/%m/%Y %H:%M')
         }
         end
@@ -54,7 +55,7 @@ module UsersServices
           page: page,
           previous_page: previous_page,
           next_page: next_page,
-          result: result
+          results: results
         }
         Success(response)
       rescue

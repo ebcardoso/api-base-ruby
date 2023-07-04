@@ -23,6 +23,7 @@ RSpec.describe Api::V1::UsersController, type: :request do
       expect(@response).to have_key('id')
       expect(@response).to have_key('name')
       expect(@response).to have_key('email')
+      expect(@response).to have_key('is_blocked')
       expect(@response).to have_key('registered_at')
     end
 
@@ -30,6 +31,7 @@ RSpec.describe Api::V1::UsersController, type: :request do
       expect(@response&.dig('id')).to eq(@current_user.id.to_s)
       expect(@response&.dig('name')).to eq(@current_user.name)
       expect(@response&.dig('email')).to eq(@current_user.email)
+      expect(@response&.dig('is_blocked')).to eq(@current_user.is_blocked)
     end
   end
 
