@@ -5,7 +5,7 @@ module UsersServices
 
       def block_user(model)
         model.is_blocked = true
-        if model.destroy
+        if model.save
           Success(I18n.t('user.block.success'))
         else
           Failure(I18n.t('user.block.errors'))

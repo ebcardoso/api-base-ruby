@@ -14,6 +14,11 @@ RSpec.describe Api::V1::UsersController, type: :request do
       @response = JSON.parse(response.body)
     end
 
+    it 'Should have blocked flag equals true' do
+      @current_user.reload
+      expect(@current_user.is_blocked).to be_truthy
+    end
+
     it 'Should return status 200' do
       expect(response).to have_http_status(200)
     end

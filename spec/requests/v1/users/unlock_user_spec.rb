@@ -10,8 +10,14 @@ RSpec.describe Api::V1::UsersController, type: :request do
       headers = {
         'Authorization': "Bearer #{json_response.dig(:content, :access)}"
       }
-      patch unlock_user_api_v1_users_path(@current_user.id.to_s), headers: headers
+      @user_blocked = FactoryBot.create(:user_002)
+      patch unlock_user_api_v1_users_path(@user_blocked.id.to_s), headers: headers
       @response = JSON.parse(response.body)
+    end
+
+    it 'Should have blocked flag equals false' do
+      @user_blocked.reload
+      expect(@user_blocked.is_blocked).to be_falsey
     end
 
     it 'Should return status 200' do
